@@ -1,0 +1,8 @@
+# Python dependencies for backend
+# Currently, no external dependencies are required as comparison is handled client-side via WASM
+# 
+# If implementing server-side API in the future, uncomment the following:
+# flask==3.0.0
+# flask-cors==4.0.0
+# python-multipart==0.0.6
+

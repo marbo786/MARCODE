@@ -1,0 +1,52 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Build outputs
+dist/
+build/
+*.wasm
+*.js.map
+*.o
+*.obj
+*.exe
+
+# Environment
+.env
+.env.local
+.venv/
+venv/
+**/venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-*
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Next.js
+.next/
+out/
+.vercel/
+
+# Testing
+.coverage
+.pytest_cache/
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+.App
+python
+
