@@ -13,7 +13,7 @@ def remove_comments(code: str, lang: str) -> str:
     """
     Remove comments from code based on language.
     
-    For Python: Removes # comments and multi-line docstrings (""", ''')
+    For Python: Removes # comments and triple-quoted docstrings.
     For C++: Removes // comments and /* ... */ block comments
     
     Args:
@@ -57,8 +57,12 @@ def _remove_python_comments(code: str) -> str:
         # Check for triple-quoted strings at start of line
         triple_match = re.match(r'^(\s*)("""|\'\'\')', line)
         if triple_match:
-            in_triple_quotes = triple_match.group(2)
-            continue  # Skip docstring start
+            delimiter = triple_match.group(2)
+            end_pos = line.find(delimiter, triple_match.end())
+            if end_pos == -1:
+                in_triple_quotes = delimiter
+                continue
+            line = line[end_pos + 3:]
         
         # Remove inline comments (#) but preserve strings
         # Simple approach: split on # and check if it's inside a string
