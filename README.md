@@ -8,6 +8,8 @@ A web-based code plagiarism detection system that compares Python and C++ code f
 ![Python](https://img.shields.io/badge/Python-3.9+-green)
 ![C++](https://img.shields.io/badge/C++-WASM-orange)
 
+> **Implementation note:** The browser currently uses a token-overlap fallback for several similarity metrics. The C++ engine is included separately; its WebAssembly integration is unfinished. Scores should be treated as exploratory signals.
+
 ## ✨ Features
 
 - **Multiple Similarity Algorithms**: Fingerprint matching, LCS, Levenshtein distance, and structural analysis
@@ -136,71 +138,6 @@ Final Score = 0.4×Fingerprint + 0.3×LCS + 0.2×Levenshtein + 0.1×Structural
 - **Medium Risk (50-79%)**: Moderate similarity
 - **Low Risk (<50%)**: Minimal or no similarity
 
-## 🚀 Quick Start
-
-### Local Development
-
-#### Prerequisites
-- Node.js 18+ 
-- Python 3.9+
-- npm or yarn
-
-#### 1. Clone Repository
-```bash
-git clone <repository-url>
-cd Marcode
-```
-
-#### 2. Install Frontend Dependencies
-```bash
-cd frontend
-npm install
-```
-
-#### 3. Install Backend Dependencies
-```bash
-cd ../backend
-pip install -r requirements.txt
-```
-
-#### 4. Run Frontend (Development)
-```bash
-cd ../frontend
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-#### 5. Build WASM Engine (Optional - for full functionality)
-```bash
-cd ../engine
-chmod +x build.sh
-# Install Emscripten SDK first: https://emscripten.org/docs/getting_started/downloads.html
-./build.sh
-```
-
-### Vercel Deployment
-
-1. **Connect Repository to Vercel**
-   - Import your GitHub repository
-   - Vercel will auto-detect Next.js configuration
-
-2. **Configure Build Settings**
-   ```json
-   Build Command: cd frontend && npm install && npm run build
-   Output Directory: frontend/.next
-   Install Command: cd frontend && npm install
-   ```
-
-3. **Environment Variables** (if needed)
-   ```env
-   NEXT_PUBLIC_API_URL=/api
-   ```
-
-4. **Deploy**
-   - Push to main branch for automatic deployment
-   - Or deploy manually from Vercel dashboard
-
 ## 📝 Usage
 
 1. **Upload Files**: Select two Python or C++ files to compare
@@ -216,44 +153,6 @@ chmod +x build.sh
 - **Warning**: Files > 300 lines (processing may take longer)
 - **Maximum**: 1500 lines per file
 - **Supported Types**: `.py`, `.cpp`, `.h`, `.hpp`
-
-## 🧪 Testing
-
-### Python Tests
-```bash
-cd tests
-python test_normalize.py
-python test_tokenize.py
-```
-
-### C++ Tests
-```bash
-cd engine
-make test
-```
-
-### Example Usage
-```bash
-cd examples
-python example_usage.py
-```
-
-### Test Cases
-
-#### ✅ Identical Files
-**Input**: Two identical Python files  
-**Expected**: All scores > 95%  
-**Result**: ✅ PASS
-
-#### ✅ Renamed Variables
-**Input**: Same code with renamed variables  
-**Expected**: High fingerprint & structural similarity  
-**Result**: ✅ PASS
-
-#### ✅ Unrelated Files
-**Input**: Two completely different files  
-**Expected**: All scores < 20%  
-**Result**: ✅ PASS
 
 ## 📊 Performance Optimizations
 
@@ -286,4 +185,3 @@ For questions or issues, please open an issue on GitHub.
 ---
 
 **Built with ❤️ using Next.js, WebAssembly, and Python**
-
